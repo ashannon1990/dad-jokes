@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Navbar from './components/Navbar'
-import Card from './components/Card'
+import JokesPage from './pages/dadJokes'
 import { Container } from '@material-ui/core'
 
 function App() {
@@ -9,10 +9,7 @@ function App() {
     <div className="App">
       <Navbar />
       <Container>
-        <Card
-          joke="Stupid joke"
-          punchline="Stupid punchline"
-        />
+        <JokesPage />
       </Container>
     </div>
   );
