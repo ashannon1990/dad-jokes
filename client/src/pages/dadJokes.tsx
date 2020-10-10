@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Card from '../components/Card'
-import axios from 'axios';
-// import API from '../utils/API';
-import { stringify } from 'querystring';
+// import axios from 'axios';
+import API from '../utils/API';
 
 const JokeCard = () => {
 
@@ -13,17 +12,35 @@ const JokeCard = () => {
         }]
     })
 
-    // const getJokes = () => {
-    //     API.getJokes(this.jokesData)
-    //         .then(res => {
-    //             console.log(res.data)
-    //             setJokes(
-    //                 ...jokes,
-    //                 res.data)
-    //         })
-    // }
+    const getJokes = () => {
+        API.getJokes(jokesState)
+            .then((res: any) => {
+                console.log(res.data)
+                res.data.map( (data: any) => {
+                    setJokes({
+                        ...jokesState,
+                        jokes: [{
+                            joke: data.joke,
+                            punchline: data.punchline
+                        }]
+                    })
+                })
+            })
+            .catch(() => {
+                console.log("Something went wrong")
+                setJokes({
+                    ...jokesState,
+                    jokes: [{
+                        joke: "Failed to load",
+                        punchline: ""
+                    }]
+                })
+            })
+    }
 
-    // useEffect()
+    useEffect(() => {
+        getJokes()
+    })
 
     return (
         <div>
